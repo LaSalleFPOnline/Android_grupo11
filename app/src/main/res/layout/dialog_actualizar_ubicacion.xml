@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/etNuevoNombreUbicacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de la ubicación"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/etNuevoTipoUbicacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tipo (Aula, Laboratorio...)"
+        android:layout_marginTop="12dp"
+        android:inputType="text" />
+
+    <Spinner
+        android:id="@+id/spinnerColegios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:id="@+id/btnActualizarUbicacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        android:textColor="@android:color/white"
+        android:backgroundTint="?attr/colorPrimary"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
+

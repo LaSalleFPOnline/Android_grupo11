@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/layoutAlumno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/txtTituloAlumno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Panel del Alumno"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="20dp"
+            tools:text="Panel del Alumno" />
+
+        <Button
+            android:id="@+id/btnVerAsignaturas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📚 Ver Mis Asignaturas"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnVerAdvertencias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="⚠️ Ver Mis Advertencias"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnVerHorario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📆 Ver Mi Horario"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnVerExamenes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📝 Ver Mis Exámenes"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnEnviarNoti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📨 Enviar Notificaciones"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+
+
+        <Button
+            android:id="@+id/btntodasNotificaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📥 Todas las Notificaciones"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnVerNotificaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📥 Nuevas Notificaciones"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+    </LinearLayout>
+</ScrollView>
+
+
+
+

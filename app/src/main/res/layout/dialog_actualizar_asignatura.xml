@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvTituloDialogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Asignatura"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="8dp" />
+
+    <EditText
+        android:id="@+id/etNuevoNombreAsignatura"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Introduce el nombre de la asignatura"
+        android:inputType="textPersonName"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:backgroundTint="@android:color/darker_gray" />
+
+    <Button
+        android:id="@+id/btnActualizarAsignatura"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Guardar"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:textColor="@android:color/white"/>
+</LinearLayout>

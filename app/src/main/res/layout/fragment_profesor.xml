@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/txtTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Panel del Profesor"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="20dp"
+            tools:text="Panel del Profesor" />
+
+        <Button
+            android:id="@+id/btnAdvertencia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📌 Insertar Advertencia"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnVerTodosExamenes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📄 Ver Todos los Exámenes"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnExamen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📝 Insertar Examen"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnNota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🎯 Insertar Nota"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnEnviarNoti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📨 Enviar Notificación"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btntodasNotificaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📥 Ver todas las Notificaciones"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnVerNotificaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📥 Nueva Notificaciones"
+            android:layout_marginBottom="16dp" />
+
+
+
+    </LinearLayout>
+</ScrollView>
+
+

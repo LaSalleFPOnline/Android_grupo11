@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <Spinner
+            android:id="@+id/spinnerACS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp" />
+
+        <EditText
+            android:id="@+id/editDescripcionExamen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción"
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:maxLines="4"
+            android:layout_marginBottom="12dp"
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/editFechaExamen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Selecciona una fecha"
+            android:focusable="false"
+            android:clickable="true"/>
+
+        <Button
+            android:id="@+id/btnSeleccionarImagen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar imagen"
+            android:layout_marginBottom="12dp" />
+
+        <ImageView
+            android:id="@+id/imageExamen"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="Imagen seleccionada"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</ScrollView>
+
+

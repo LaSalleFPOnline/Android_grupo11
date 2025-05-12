@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialogActualizarSemestre"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/etNuevoNumeroSemestre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Número del semestre"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/etNuevaFechaInicioSemestre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:focusable="false"
+        android:hint="Fecha de inicio"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/etNuevaFechaFinSemestre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:focusable="false"
+        android:hint="Fecha de fin"
+        android:inputType="date" />
+
+    <Button
+        android:id="@+id/btnActualizarSemestre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:layout_marginTop="16dp" />
+</LinearLayout>

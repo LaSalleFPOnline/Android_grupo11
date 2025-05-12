@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Spinner para tipo de destinatario -->
+    <Spinner
+        android:id="@+id/spinnerTipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Spinner para elegir destinatario -->
+    <Spinner
+        android:id="@+id/spinnerDestinatario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Título de la notificación -->
+    <EditText
+        android:id="@+id/editTituloNoti"
+        android:hint="Título"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Mensaje de la notificación -->
+    <EditText
+        android:id="@+id/editMensajeNoti"
+        android:hint="Mensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minLines="3" />
+</LinearLayout>
+

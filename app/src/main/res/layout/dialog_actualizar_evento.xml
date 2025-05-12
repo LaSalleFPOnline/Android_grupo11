@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutDialogEvento"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <EditText
+        android:id="@+id/etTituloEvento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Concepto del evento"
+        android:inputType="textPersonName"
+        android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/etDescripcionEvento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fecha del evento"
+        android:focusable="false"
+        android:clickable="true"
+        android:layout_marginBottom="12dp" />
+
+    <Spinner
+        android:id="@+id/spinnerUbicaciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnActualizarEvento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:textColor="@android:color/white" />
+</LinearLayout>
+
+

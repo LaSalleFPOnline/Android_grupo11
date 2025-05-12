@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Formulario de Clase"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingBottom="16dp"
+            android:textColor="#3F51B5" />
+
+        <!-- Spinner de Ubicación -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ubicación:"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinnerLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Spinner de ACS -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Asignación ACS:"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinnerACS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Hora de inicio -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hora de inicio:"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etStartTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="HH:mm"
+            android:focusable="false"
+            android:inputType="time"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Hora de fin -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hora de fin:"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etEndTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="HH:mm"
+            android:focusable="false"
+            android:inputType="time"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Días de la semana -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Días:"
+            android:textStyle="bold" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:layout_marginBottom="16dp">
+
+            <CheckBox android:id="@+id/cbMonday" android:text="Lunes" />
+            <CheckBox android:id="@+id/cbTuesday" android:text="Martes" />
+            <CheckBox android:id="@+id/cbWednesday" android:text="Miércoles" />
+            <CheckBox android:id="@+id/cbThursday" android:text="Jueves" />
+            <CheckBox android:id="@+id/cbFriday" android:text="Viernes" />
+            <CheckBox android:id="@+id/cbSaturday" android:text="Sábado" />
+            <CheckBox android:id="@+id/cbSunday" android:text="Domingo" />
+        </GridLayout>
+
+        <!-- Botón de guardar -->
+        <Button
+            android:id="@+id/btnGuardarClase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:textColor="@android:color/white"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+</ScrollView>
+

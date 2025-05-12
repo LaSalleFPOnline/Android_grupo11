@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="12dp"
+    android:orientation="vertical"
+    android:background="#f5f5f5"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp">
+
+    <TextView
+        android:id="@+id/tvNumeroSemestre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Semestre: 1"
+        android:textStyle="bold"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvFechaInicioSemestre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inicio: 2025-01-01" />
+
+    <TextView
+        android:id="@+id/tvFechaFinSemestre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fin: 2025-06-01" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="4dp">
+
+        <ImageButton
+            android:id="@+id/btnEditarSemestre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_edit"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <ImageButton
+            android:id="@+id/btnEliminarSemestre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_delete"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+    </LinearLayout>
+</LinearLayout>

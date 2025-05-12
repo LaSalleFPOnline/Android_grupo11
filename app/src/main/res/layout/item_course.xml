@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="#f4f4f4"
+    android:layout_marginBottom="8dp">
+
+    <TextView
+        android:id="@+id/tvNombreCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre del curso"
+        android:textStyle="bold"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvGrupoCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Grupo" />
+
+    <TextView
+        android:id="@+id/tvColegioCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Colegio" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="4dp">
+
+        <ImageButton
+            android:id="@+id/btnEditarCurso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_edit"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <ImageButton
+            android:id="@+id/btnEliminarCurso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_delete"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+    </LinearLayout>
+
+</LinearLayout>

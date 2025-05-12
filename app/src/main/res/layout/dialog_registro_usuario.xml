@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registrar nuevo usuario"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Correo -->
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Correo electrónico"
+            android:inputType="textEmailAddress" />
+
+        <!-- Nombre -->
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre"
+            android:layout_marginTop="8dp" />
+
+        <!-- Segundo nombre -->
+        <EditText
+            android:id="@+id/etMiddleName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Segundo nombre"
+            android:layout_marginTop="8dp" />
+
+        <!-- Apellido -->
+        <EditText
+            android:id="@+id/etApellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Apellido"
+            android:layout_marginTop="8dp" />
+
+        <!-- Teléfono -->
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Teléfono"
+            android:inputType="phone"
+            android:layout_marginTop="8dp" />
+
+        <!-- Código de activación -->
+        <EditText
+            android:id="@+id/etCodigoActivacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Código de activación"
+            android:layout_marginTop="8dp"
+            android:inputType="text" />
+
+        <!-- Spinner rol -->
+        <Spinner
+            android:id="@+id/spinnerRoles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" />
+
+        <!-- Spinner estados -->
+        <Spinner
+            android:id="@+id/spinnerEstados"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+
+        <!-- Spinner colegio -->
+        <Spinner
+            android:id="@+id/spinnerColegios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" />
+
+        <!-- Spinner curso -->
+        <Spinner
+            android:id="@+id/spinnerCursos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+
+
+        <!-- Selección múltiple de asignaturas (como botón) -->
+        <TextView
+            android:id="@+id/spinnerAsignaturas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Seleccionar asignaturas"
+            android:padding="12dp"
+            android:layout_marginTop="8dp" />
+
+
+
+        <!-- Vista previa de la imagen -->
+        <ImageView
+            android:id="@+id/ivPreviewFoto"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Vista previa de la foto"
+            android:src="@drawable/logo" />
+
+        <!-- Botón tomar foto -->
+        <Button
+            android:id="@+id/btnTomarFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tomar Foto"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp" />
+
+        <!-- Botón registrar -->
+        <Button
+            android:id="@+id/btnRegistrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="?attr/colorPrimary"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</ScrollView>
+

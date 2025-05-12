@@ -1,0 +1,37 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginHorizontal="8dp"
+    android:elevation="4dp"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textAsignatura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📚 Asignatura"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textCurso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🧑 Curso"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textProfesor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="👨‍🏫 Profesor"
+            android:textSize="14sp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

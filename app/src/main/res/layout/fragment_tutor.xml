@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/txtTituloTutor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📚 Panel del Tutor"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="20dp"
+            tools:text="Panel del Tutor" />
+
+        <Button
+            android:id="@+id/btnVerAdvertencias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🔔 Ver Advertencias"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnVerNotas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📈 Ver Notas"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnEnviarNoti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📨 Enviar Notificación al Profesor"
+            android:layout_marginBottom="16dp" />
+
+
+        <Button
+            android:id="@+id/btnTodasNotificaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📥 Todas las Notificaciones"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnVerNotificaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📥 Nuevas Notificaciones"
+            android:layout_marginBottom="16dp" />
+
+
+    </LinearLayout>
+</ScrollView>
+

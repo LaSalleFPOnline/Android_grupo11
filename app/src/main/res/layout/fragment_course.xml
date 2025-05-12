@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Título centrado -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gestión de Cursos"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <!-- Buscador -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewCursos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:queryHint="Buscar curso" />
+
+    <!-- Lista -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCursos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="12dp" />
+
+    <!-- Botón agregar -->
+    <Button
+        android:id="@+id/btnAgregarCurso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agregar Curso"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:layout_marginTop="12dp" />
+</LinearLayout>

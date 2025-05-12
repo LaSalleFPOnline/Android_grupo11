@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="#f4f4f4"
+    android:layout_marginBottom="8dp">
+
+    <TextView
+        android:id="@+id/tvConcepto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Concepto del Evento"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fecha del Evento"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvNombreUbicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre de la Ubicación"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvNombreColegio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Colegio"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="4dp">
+
+        <ImageButton
+            android:id="@+id/btnActualizarEvento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_update"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Actualizar Evento" />
+
+        <ImageButton
+            android:id="@+id/btnEliminarEvento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_delete"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Eliminar Evento" />
+    </LinearLayout>
+
+</LinearLayout>

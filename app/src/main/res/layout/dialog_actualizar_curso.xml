@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/etNuevoNombreCurso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del curso (Ej: 1º ESO)"
+        android:inputType="textCapWords"
+        android:maxLines="1" />
+
+    <EditText
+        android:id="@+id/etNuevoGrupoCurso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Grupo (Ej: A, B...)"
+        android:inputType="textCapCharacters"
+        android:maxLines="1"
+        android:layout_marginTop="12dp" />
+
+    <Spinner
+        android:id="@+id/spinnerColegiosCurso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:id="@+id/btnActualizarCurso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        android:textStyle="bold"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp" />
+</LinearLayout>

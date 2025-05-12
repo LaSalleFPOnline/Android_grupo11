@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#f5f5f5"
+    android:layout_marginBottom="8dp">
+
+    <TextView
+        android:id="@+id/tvNombreAsignatura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre asignatura"
+        android:textStyle="bold"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnEditarAsignatura"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_edit"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <ImageButton
+            android:id="@+id/btnEliminarAsignatura"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_delete"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+    </LinearLayout>
+</LinearLayout>

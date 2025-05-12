@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <!-- 🔹 SplashFragment -->
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.educontrol.fragment.registro.SplashFragment"
+        android:label="Splash Screen"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <!-- 🔹 LoginFragment -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.educontrol.fragment.registro.LoginFragment"
+        android:label="Login Screen"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_alumnoFragment"
+            app:destination="@id/alumnoFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_profesorFragment"
+            app:destination="@id/profesorFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_tutorFragment"
+            app:destination="@id/tutorFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_adminFragment"
+            app:destination="@id/adminFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_olvidoContrasenaFragment"
+            app:destination="@id/olvidoContrasenaFragment"/>
+    </fragment>
+
+    <!-- 🔹 AlumnoFragment -->
+    <fragment
+        android:id="@+id/alumnoFragment"
+        android:name="com.example.educontrol.fragment.usuarios.AlumnoFragment"
+        android:label="Alumno Screen"
+        tools:layout="@layout/fragment_alumno"/>
+
+    <!-- 🔹 ProfesorFragment -->
+    <fragment
+        android:id="@+id/profesorFragment"
+        android:name="com.example.educontrol.fragment.usuarios.ProfesorFragment"
+        android:label="Profesor Screen"
+        tools:layout="@layout/fragment_profesor"/>
+
+    <!-- 🔹 PadreFragment -->
+    <fragment
+        android:id="@+id/tutorFragment"
+        android:name="com.example.educontrol.fragment.usuarios.TutorFragment"
+        android:label="Padre Screen"
+        tools:layout="@layout/fragment_tutor"/>
+
+    <!-- 🔹 AsignaturaFragment -->
+    <fragment
+        android:id="@+id/asignaturaFrag"
+        android:name="com.example.educontrol.fragment.acciones.AsignaturaFragment"
+        android:label="Gestión de Asignaturas"
+        tools:layout="@layout/fragment_asignatura"/>
+
+    <!-- 🔹 OlvidoContrasenaFragment -->
+    <fragment
+        android:id="@+id/olvidoContrasenaFragment"
+        android:name="com.example.educontrol.fragment.registro.OlvidoContrasenaFragment"
+        android:label="Recuperar Contraseña"
+        tools:layout="@layout/fragment_olvido_contrasena"/>
+
+    <!-- 🔹 AdminFragment -->
+    <fragment
+        android:id="@+id/adminFragment"
+        android:name="com.example.educontrol.fragment.usuarios.AdminFragment"
+        android:label="AdminFragment"
+        tools:layout="@layout/fragment_admin">
+
+        <action
+            android:id="@+id/action_adminFragment_to_usuarioFragment"
+            app:destination="@id/UsuarioFragment"/>
+
+        <action
+            android:id="@+id/action_adminFragment_to_colegioFragment"
+            app:destination="@id/colegioFragment"/>
+
+        <action
+            android:id="@+id/action_adminFragment_to_ubicacionFragment"
+            app:destination="@id/ubicacionFragment"/>
+
+        <!-- 🔹 Acción para navegar a EventoFragment -->
+        <action
+            android:id="@+id/action_adminFragment_to_eventoFragment"
+            app:destination="@id/eventoFragment"/>
+
+        <!-- 🔹 Acción para navegar a CourseFragment -->
+        <action
+            android:id="@+id/action_adminFragment_to_courseFragment"
+            app:destination="@id/courseFragment"/>
+
+        <!-- 🔹 Acción para navegar a SemetreFragment -->
+        <action
+            android:id="@+id/action_adminFragment_to_semestreFragment"
+            app:destination="@id/semestreFragment"/>
+
+        <!-- 🔹 Acción para navegar a SubjectFragment -->
+        <action
+            android:id="@+id/action_adminFragment_to_asignaturaFragment"
+            app:destination="@id/asignaturaFrag"/>
+
+        <!-- 🔹 Acción para navegar a AcsFragment -->
+        <action
+            android:id="@+id/action_adminFragment_to_acsFragment"
+            app:destination="@id/acsFragment"/>
+
+        <!-- 🔹 Acción para navegar a ClaseFragment -->
+        <action
+            android:id="@+id/action_adminFragment_to_claseFragment"
+            app:destination="@id/claseFragment"/>
+
+    </fragment>
+
+    <!-- 🔹 Registro de Usuario Fragment -->
+    <fragment
+        android:id="@+id/registroUsuarioFragment"
+        android:name="com.example.educontrol.fragment.registro.RegistroUsuarioFragment"
+        android:label="RegistroUsuarioFragment"
+        tools:layout="@layout/fragment_registro_usuario"/>
+
+    <!-- 🔹 ColegioFragment -->
+    <fragment
+        android:id="@+id/colegioFragment"
+        android:name="com.example.educontrol.fragment.acciones.ColegioFragment"
+        android:label="Gestión de Colegios"
+        tools:layout="@layout/fragment_colegio"/>
+
+    <!-- 🔹 UbicacionFragment -->
+    <fragment
+        android:id="@+id/ubicacionFragment"
+        android:name="com.example.educontrol.fragment.acciones.UbicacionFragment"
+        android:label="Gestión de Ubicaciones"
+        tools:layout="@layout/fragment_ubicacion"/>
+
+    <!-- 🔹 EventoFragment -->
+    <fragment
+        android:id="@+id/eventoFragment"
+        android:name="com.example.educontrol.fragment.acciones.EventoFragment"
+        android:label="Gestión de Eventos"
+        tools:layout="@layout/fragment_evento">
+        <action
+            android:id="@+id/action_eventoFragment_self"
+            app:destination="@id/eventoFragment" />
+    </fragment>
+
+    <!-- 🔹 UsuarioFragment -->
+
+    <fragment
+        android:id="@+id/UsuarioFragment"
+        android:name="com.example.educontrol.fragment.acciones.UsuarioFragment"
+        android:label="Gestión de Usuarios"
+        tools:layout="@layout/fragment_usuario"/>
+
+    <!-- 🔹 UsuarioFragment -->
+
+    <fragment
+        android:id="@+id/courseFragment"
+        android:name="com.example.educontrol.fragment.acciones.CourseFragment"
+        android:label="Gestión de Cursos"
+        tools:layout="@layout/fragment_course"/>
+
+    <!-- 🔹 SemestreFragment -->
+
+    <fragment
+        android:id="@+id/semestreFragment"
+        android:name="com.example.educontrol.fragment.acciones.SemestreFragment"
+        android:label="Gestión de Semestres"
+        tools:layout="@layout/fragment_semestre"/>
+
+    <!-- 🔹 AcsFragment -->
+
+    <fragment
+        android:id="@+id/acsFragment"
+        android:name="com.example.educontrol.fragment.acciones.AcsFragment"
+        android:label="Gestión de ACS"
+        tools:layout="@layout/fragment_acs"/>
+
+    <!-- 🔹 ClaseFragment -->
+
+    <fragment
+        android:id="@+id/claseFragment"
+        android:name="com.example.educontrol.fragment.acciones.ClaseFragment"
+        android:label="Gestión de Clases"
+        tools:layout="@layout/fragment_clase"/>
+
+
+
+</navigation>
+
+

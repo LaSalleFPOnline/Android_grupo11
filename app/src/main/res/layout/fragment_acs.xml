@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gestión de Asignaciones ACS"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <SearchView
+        android:id="@+id/searchViewAcs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Buscar asignaciones..."
+        android:layout_marginTop="8dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAcs"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:id="@+id/btnAgregarAcs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agregar Asignación"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:layout_marginTop="12dp" />
+</LinearLayout>
+
+
