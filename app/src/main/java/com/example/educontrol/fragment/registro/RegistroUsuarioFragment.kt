@@ -39,6 +39,7 @@ class RegistroUsuarioFragment : Fragment() {
     private var rolesMap: MutableMap<String, Int> = mutableMapOf()
     private var tutoresMap: MutableMap<String, Int> = mutableMapOf()
     private var guardianIdSeleccionado: Int? = null
+    private var etCodigoOCR: EditText? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -154,12 +155,16 @@ class RegistroUsuarioFragment : Fragment() {
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
             }
 
+            // También guarda el base64
             val outputStream = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
             val base64String = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
 
             val base64File = File(dir, "foto_$timestamp.txt")
             FileOutputStream(base64File).use { out -> out.write(base64String.toByteArray()) }
+            val nuevoCodigo = generarCodigoActivacion()
+            etCodigoOCR?.setText(nuevoCodigo)
+
 
         } catch (e: Exception) {
             Log.e("educontrol", "Error al guardar la imagen", e)
@@ -203,6 +208,10 @@ class RegistroUsuarioFragment : Fragment() {
                 Toast.makeText(requireContext(), "Error: $message", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun generarCodigoActivacion(): String {
+        return (100000..999999).random().toString()
     }
 }
 

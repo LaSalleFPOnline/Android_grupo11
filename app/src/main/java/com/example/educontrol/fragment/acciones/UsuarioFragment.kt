@@ -122,6 +122,7 @@ class UsuarioFragment : Fragment() {
         val etEmail = view.findViewById<EditText>(R.id.etEmail)
         val etMovil = view.findViewById<EditText>(R.id.etTelefono)
         val etCodigo = view.findViewById<EditText>(R.id.etCodigoActivacion)
+        val btnGenerarCodigo = view.findViewById<ImageButton>(R.id.btnGenerarCodigo)
         val spinnerRol = view.findViewById<Spinner>(R.id.spinnerRol)
         val spinnerCurso = view.findViewById<Spinner>(R.id.spinnerCurso)
         val spinnerEstado = view.findViewById<Spinner>(R.id.spinnerEstado)
@@ -130,6 +131,7 @@ class UsuarioFragment : Fragment() {
         val btnGuardar = view.findViewById<Button>(R.id.btnGuardarUsuario)
         val ivFoto = view.findViewById<ImageView>(R.id.ivFotoUsuario)
         ivFotoActual = ivFoto
+
 
         val asignaturasSeleccionadas = mutableListOf<Int>()
 
@@ -140,6 +142,12 @@ class UsuarioFragment : Fragment() {
         spinnerRol.adapter = crearAdapter(nombresRoles)
         spinnerCurso.adapter = crearAdapter(nombresCursos)
         spinnerEstado.adapter = crearAdapter(nombresEstados)
+
+        btnGenerarCodigo.setOnClickListener {
+            val nuevoCodigo = generarCodigoActivacion()
+            etCodigo.setText(nuevoCodigo)
+            Toast.makeText(requireContext(), "Código generado: $nuevoCodigo", Toast.LENGTH_SHORT).show()
+        }
 
         btnFoto.setOnClickListener {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -196,15 +204,13 @@ class UsuarioFragment : Fragment() {
             etEmail.setText(it.email)
             etMovil.setText(it.movil ?: "")
             etCodigo.setText(it.codigoActivacion ?: "")
-            fotoBase64 = null // limpiar foto base64 si viene de backend
+            fotoBase64 = null
 
             spinnerRol.setSelection(listaRoles.indexOfFirst { r -> r.id == it.idRol } + 1)
             spinnerCurso.setSelection(listaCursos.indexOfFirst { c -> c.id_curso == it.courseId } + 1)
             spinnerEstado.setSelection(listaEstados.indexOfFirst { e -> e.id_estado == it.idEstado } + 1)
 
             val fotoParaMostrar = it.photo
-            Log.d("educontrol", "🧪 Foto Base64 recibida: ${fotoParaMostrar?.take(100)}")
-
             if (!fotoParaMostrar.isNullOrEmpty()) {
                 try {
                     val base64Clean = if (fotoParaMostrar.contains(",")) fotoParaMostrar.substringAfter(",") else fotoParaMostrar
@@ -212,7 +218,6 @@ class UsuarioFragment : Fragment() {
                     val bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
                     ivFoto.setImageBitmap(bitmap)
                 } catch (e: Exception) {
-                    Log.e("educontrol", "❌ Error mostrando foto en edición: ${e.message}")
                     ivFoto.setImageResource(R.drawable.ic_account_profile)
                 }
             } else {
@@ -246,7 +251,6 @@ class UsuarioFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            // ✅ Convertir asignaturas seleccionadas a id_acs
             val idsACS = listaACS.filter {
                 it.courseId == curso?.id_curso && asignaturasSeleccionadas.contains(it.subjectId)
             }.mapNotNull { it.id }
@@ -257,8 +261,6 @@ class UsuarioFragment : Fragment() {
             }
 
             val finalPhoto = fotoBase64 ?: usuario?.photo
-            Log.d("educontrol", "📤 Foto enviada: ${finalPhoto?.take(100)}")
-            Log.d("educontrol", "✅ IDs ACS para enviar: $idsACS")
 
             val data = UsuarioAdd(
                 email = email,
@@ -273,7 +275,7 @@ class UsuarioFragment : Fragment() {
                 photo = finalPhoto,
                 phototype = "image/jpeg",
                 codigoActivacion = codigo,
-                subjects = idsACS, // ✅ ¡Ahora sí se envían los id_acs correctos!
+                subjects = idsACS,
                 courseId = curso?.id_curso
             )
 
@@ -281,7 +283,6 @@ class UsuarioFragment : Fragment() {
                 viewModel.addUser(data, token)
             } else {
                 viewModel.updateUsuario(usuario.idUsuario, data, token)
-
                 val usuarioActualizado = usuario.copy(
                     nombre = data.name,
                     primerApellido = data.middlename,
@@ -303,9 +304,9 @@ class UsuarioFragment : Fragment() {
             cerrarTeclado()
         }
 
-
         dialog.show()
     }
+
 
     private fun crearAdapter(lista: List<String>): ArrayAdapter<String> {
         return ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, lista).apply {
@@ -336,6 +337,10 @@ class UsuarioFragment : Fragment() {
     private fun getToken(context: Context): String? {
         return context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
             .getString("auth_token", null)
+    }
+
+    private fun generarCodigoActivacion(): String {
+        return (100000..999999).random().toString()
     }
 }
 

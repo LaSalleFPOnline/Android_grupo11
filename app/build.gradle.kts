@@ -88,6 +88,8 @@ dependencies {
     implementation(libs.glide)
     kapt(libs.glide.compiler)
 
+    implementation (libs.text.recognition)
+
 
 
 
