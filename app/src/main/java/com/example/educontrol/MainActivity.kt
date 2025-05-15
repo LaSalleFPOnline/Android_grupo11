@@ -1,7 +1,15 @@
 package com.example.educontrol
 
+import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.BitmapFactory
+import android.nfc.NdefMessage
+import android.nfc.NdefRecord
+import android.nfc.NfcAdapter
+import android.nfc.Tag
+import android.nfc.tech.IsoDep
+import android.nfc.tech.Ndef
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
@@ -16,14 +24,17 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.Glide
 import com.example.educontrol.databinding.ActivityMainBinding
+import com.example.educontrol.fragment.usuarios.AlumnoFragment
 import com.google.android.material.appbar.MaterialToolbar
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var topAppBar: MaterialToolbar
     private lateinit var tvUserName: TextView
+
 
     // Almacenamiento de datos del usuario
     private val sharedPreferences: SharedPreferences by lazy { getSharedPreferences("USER_SESSION", MODE_PRIVATE) }
@@ -59,6 +70,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        Log.d("educontrol", "📲 onNewIntent recibido: $intent")
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+        val currentFragment = navHostFragment?.childFragmentManager?.fragments?.firstOrNull()
+
+        if (currentFragment is AlumnoFragment) {
+            Log.d("educontrol", "➡️ Reenviando intent al AlumnoFragment")
+            currentFragment.handleNfcIntent(intent)
+        } else {
+            Log.w("educontrol", "⚠️ currentFragment no es AlumnoFragment")
+        }
+    }
+
+
+
 
     // 🔹 Inflar el menú en la barra superior
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

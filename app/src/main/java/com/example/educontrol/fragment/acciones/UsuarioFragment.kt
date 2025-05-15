@@ -121,8 +121,8 @@ class UsuarioFragment : Fragment() {
         val etApellido2 = view.findViewById<EditText>(R.id.etApellido2)
         val etEmail = view.findViewById<EditText>(R.id.etEmail)
         val etMovil = view.findViewById<EditText>(R.id.etTelefono)
-        val etCodigo = view.findViewById<EditText>(R.id.etCodigoActivacion)
-        val btnGenerarCodigo = view.findViewById<ImageButton>(R.id.btnGenerarCodigo)
+//        val etCodigo = view.findViewById<EditText>(R.id.etCodigoActivacion)
+//        val btnGenerarCodigo = view.findViewById<ImageButton>(R.id.btnGenerarCodigo)
         val spinnerRol = view.findViewById<Spinner>(R.id.spinnerRol)
         val spinnerCurso = view.findViewById<Spinner>(R.id.spinnerCurso)
         val spinnerEstado = view.findViewById<Spinner>(R.id.spinnerEstado)
@@ -143,11 +143,11 @@ class UsuarioFragment : Fragment() {
         spinnerCurso.adapter = crearAdapter(nombresCursos)
         spinnerEstado.adapter = crearAdapter(nombresEstados)
 
-        btnGenerarCodigo.setOnClickListener {
-            val nuevoCodigo = generarCodigoActivacion()
-            etCodigo.setText(nuevoCodigo)
-            Toast.makeText(requireContext(), "Código generado: $nuevoCodigo", Toast.LENGTH_SHORT).show()
-        }
+//        btnGenerarCodigo.setOnClickListener {
+//            val nuevoCodigo = generarCodigoActivacion()
+//            etCodigo.setText(nuevoCodigo)
+//            Toast.makeText(requireContext(), "Código generado: $nuevoCodigo", Toast.LENGTH_SHORT).show()
+//        }
 
         btnFoto.setOnClickListener {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -203,7 +203,7 @@ class UsuarioFragment : Fragment() {
             etApellido2.setText(it.segundoApellido ?: "")
             etEmail.setText(it.email)
             etMovil.setText(it.movil ?: "")
-            etCodigo.setText(it.codigoActivacion ?: "")
+//            etCodigo.setText(it.codigoActivacion ?: "")
             fotoBase64 = null
 
             spinnerRol.setSelection(listaRoles.indexOfFirst { r -> r.id == it.idRol } + 1)
@@ -241,7 +241,7 @@ class UsuarioFragment : Fragment() {
             val apellido2 = etApellido2.text.toString().trim()
             val email = etEmail.text.toString().trim()
             val movil = etMovil.text.toString().trim()
-            val codigo = etCodigo.text.toString().trim()
+            val codigo ="1234"
             val rol = listaRoles.getOrNull(spinnerRol.selectedItemPosition - 1)
             val curso = listaCursos.getOrNull(spinnerCurso.selectedItemPosition - 1)
             val estado = listaEstados.getOrNull(spinnerEstado.selectedItemPosition - 1)
@@ -299,6 +299,9 @@ class UsuarioFragment : Fragment() {
                 adapter.submitList(listaUsuarios.toList())
                 adapter.notifyDataSetChanged()
             }
+//            val prefs = requireContext().getSharedPreferences("USER_SESSION", Context.MODE_PRIVATE)
+//            prefs.edit().putString("CODIGO_ACTIVACION", codigo).apply()
+
 
             dialog.dismiss()
             cerrarTeclado()
@@ -339,9 +342,9 @@ class UsuarioFragment : Fragment() {
             .getString("auth_token", null)
     }
 
-    private fun generarCodigoActivacion(): String {
-        return (100000..999999).random().toString()
-    }
+//    private fun generarCodigoActivacion(): String {
+//        return (100000..999999).random().toString()
+//    }
 }
 
 

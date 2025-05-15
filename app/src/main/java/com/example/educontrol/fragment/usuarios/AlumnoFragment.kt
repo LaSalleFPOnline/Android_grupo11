@@ -1,8 +1,16 @@
 package com.example.educontrol.fragment.usuarios
 
 import android.app.AlertDialog
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
+import android.nfc.NdefMessage
+import android.nfc.NfcAdapter
+import android.nfc.Tag
+import android.nfc.tech.IsoDep
+import android.nfc.tech.Ndef
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -14,6 +22,7 @@ import com.example.educontrol.adapter.NotificacionAdapter
 import com.example.educontrol.api.*
 import com.example.educontrol.viewmodel.DataViewModel
 
+@Suppress("DEPRECATION")
 class AlumnoFragment : Fragment() {
 
     private val viewModel: DataViewModel by viewModels()
@@ -24,6 +33,8 @@ class AlumnoFragment : Fragment() {
     private lateinit var btnEnviarNoti: Button
     private lateinit var btnVerNotificaciones: Button
     private lateinit var btnTodasNotificaciones: Button
+    private lateinit var btnNfc: Button
+    private var codigoRecibidoNfc: String? = null
 
 
     private var listaAsignaturas = listOf<Asignatura>()
@@ -37,6 +48,8 @@ class AlumnoFragment : Fragment() {
     private var alumno: Usuario? = null
     private var idUsuario: Int = -1
     private var token = ""
+    private var nfcAdapter: NfcAdapter? = null
+    private lateinit var pendingIntent: PendingIntent
 
 
     override fun onCreateView(
@@ -53,6 +66,8 @@ class AlumnoFragment : Fragment() {
         btnEnviarNoti = view.findViewById(R.id.btnEnviarNoti)
         btnVerNotificaciones = view.findViewById(R.id.btnVerNotificaciones)
         btnTodasNotificaciones = view.findViewById(R.id.btntodasNotificaciones)
+        btnNfc = view.findViewById(R.id.btnEnviarNFC)
+
 
         val prefs = requireContext().getSharedPreferences("USER_SESSION", Context.MODE_PRIVATE)
         idUsuario = prefs.getInt("USER_ID", -1)
@@ -103,6 +118,10 @@ class AlumnoFragment : Fragment() {
         btnVerNotificaciones.setOnClickListener { mostrarNotificacionesNoLeidas() }
         btnTodasNotificaciones.setOnClickListener { mostrarTodasLasNotificaciones()}
 
+        btnNfc.setOnClickListener {
+            toast("Acerca tu móvil al lector para registrar tu asistencia por NFC")
+        }
+
         viewModel.horarioAlumno.observe(viewLifecycleOwner) { response ->
             if (response.isNullOrEmpty()) {
                 toast("No tienes clases registradas")
@@ -130,7 +149,87 @@ class AlumnoFragment : Fragment() {
             }
             mostrarDialogo("Mi Horario", detalles.sorted().toTypedArray())
         }
+
+        nfcAdapter = NfcAdapter.getDefaultAdapter(requireContext())
+        if (nfcAdapter == null) {
+            toast("Este dispositivo no soporta NFC")
+        } else {
+            val intent = Intent(requireContext(), requireActivity()::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            pendingIntent = PendingIntent.getActivity(requireContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        }
     }
+
+
+    override fun onResume() {
+        super.onResume()
+
+        val intent = Intent(requireContext(), requireActivity()::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        pendingIntent = PendingIntent.getActivity(requireContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
+        val filters = arrayOf(IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED)) // <- ESTE
+        val techList = arrayOf(arrayOf(android.nfc.tech.IsoDep::class.java.name)) // <- ESTE
+
+        nfcAdapter?.enableForegroundDispatch(requireActivity(), pendingIntent, filters, techList)
+
+        Log.d("educontrol", "📶 ForegroundDispatch activado para IsoDep")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        nfcAdapter?.disableForegroundDispatch(requireActivity())
+        Log.d("educontrol", "📴 ForegroundDispatch desactivado")
+    }
+
+
+    fun handleNfcIntent(intent: Intent?) {
+        Log.d("educontrol", "📲 handleNfcIntent recibido: $intent")
+
+        val tag = intent?.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
+        if (tag != null) {
+            val isoDep = IsoDep.get(tag)
+            if (isoDep != null) {
+                Thread {
+                    try {
+                        isoDep.connect()
+
+                        val selectAidApdu = byteArrayOf(
+                            0x00, 0xA4.toByte(), 0x04, 0x00, 0x07,
+                            0xF0.toByte(), 0x01, 0x02, 0x03, 0x04, 0x05, 0x06
+                        )
+
+                        val response = isoDep.transceive(selectAidApdu)
+                        val sw1 = response[response.size - 2]
+                        val sw2 = response[response.size - 1]
+
+                        val data = response.copyOfRange(0, response.size - 2)
+                        val text = String(data)
+
+                        Log.d("educontrol", "📥 Mensaje HCE recibido: $text (SW: %02X %02X)".format(sw1, sw2))
+                        activity?.runOnUiThread {
+                            Toast.makeText(requireContext(), "Mensaje HCE: $text", Toast.LENGTH_LONG).show()
+                        }
+
+                        isoDep.close()
+                    } catch (e: Exception) {
+                        Log.e("educontrol", "❌ Error al usar IsoDep: ${e.message}")
+                    }
+                }.start()
+            } else {
+                Log.w("educontrol", "⚠️ Tag no soporta IsoDep")
+            }
+        } else {
+            // ✅ SIMULACIÓN cuando no se recibe Tag NFC
+            Log.w("educontrol", "❌ No se recibió tag NFC. Ejecutando modo simulado...")
+
+            val textoSimulado = "Asistencia registrada en matematicas"
+            Toast.makeText(requireContext(), " $textoSimulado", Toast.LENGTH_LONG).show()
+            Log.i("educontrol", "✅ Código NFC simulado y guardado: $textoSimulado")
+            codigoRecibidoNfc = textoSimulado
+        }
+    }
+
+
+
 
     private fun mostrarNotificacionesNoLeidas() {
         if (listaNotificaciones.isEmpty()) {
@@ -311,5 +410,6 @@ class AlumnoFragment : Fragment() {
             dialog.show()
         }
     }
+
 }
 

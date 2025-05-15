@@ -15,7 +15,7 @@
             android:id="@+id/txtTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Panel del Profesor"
+            android:text="🧑‍🏫 Panel del Profesor"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#333333"

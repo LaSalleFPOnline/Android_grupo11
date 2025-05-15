@@ -15,7 +15,7 @@
             android:id="@+id/txtTituloTutor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="📚 Panel del Tutor"
+            android:text="👤 Panel del Tutor"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#333333"
