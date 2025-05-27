@@ -37,9 +37,6 @@ class AlumnoFragment : Fragment() {
     private lateinit var btnVerNotificaciones: Button
     private lateinit var btnTodasNotificaciones: Button
     private lateinit var btnNfc: Button
-
-
-
     private var listaAsignaturas = listOf<Asignatura>()
     private var listaACS = listOf<ACS>()
     private var listaUsuarios = listOf<Usuario>()
