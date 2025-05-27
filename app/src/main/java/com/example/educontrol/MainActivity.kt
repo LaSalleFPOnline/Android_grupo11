@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         Log.d("educontrol", "📲 onNewIntent recibido: $intent")
 
-        // ⚠️ NO extraemos el tag aquí. Dejamos que lo haga el fragmento.
+        // ⚠️ NO extraigo el tag aquí. Dejamos que lo haga el fragmento.
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
         val currentFragment = navHostFragment
             ?.childFragmentManager

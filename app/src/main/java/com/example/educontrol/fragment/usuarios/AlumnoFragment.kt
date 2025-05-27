@@ -37,7 +37,7 @@ class AlumnoFragment : Fragment() {
     private lateinit var btnVerNotificaciones: Button
     private lateinit var btnTodasNotificaciones: Button
     private lateinit var btnNfc: Button
-    private var codigoRecibidoNfc: String? = null
+
 
 
     private var listaAsignaturas = listOf<Asignatura>()
@@ -62,15 +62,6 @@ class AlumnoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val intent = Intent(requireContext(), requireActivity()::class.java)
-            .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-
-        pendingIntent = PendingIntent.getActivity(
-            requireContext(),
-            0,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE
-        )
 
         btnVerAsignaturas = view.findViewById(R.id.btnVerAsignaturas)
         btnVerAdvertencias = view.findViewById(R.id.btnVerAdvertencias)
@@ -167,24 +158,20 @@ class AlumnoFragment : Fragment() {
         if (nfcAdapter == null) {
             toast("Este dispositivo no soporta NFC")
         } else {
-            val intent = Intent(requireContext(), requireActivity()::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            pendingIntent = PendingIntent.getActivity(requireContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE)
+            val intent = Intent(requireContext(), requireActivity()::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            pendingIntent = PendingIntent.getActivity(
+                requireContext(),
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+            )
         }
-    }
 
+    }
 
     override fun onResume() {
         super.onResume()
-
-        val intent = Intent(requireActivity().applicationContext, requireActivity()::class.java)
-            .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-
-        pendingIntent = PendingIntent.getActivity(
-            requireActivity().applicationContext,
-            0,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
-        )
 
         val filters = arrayOf(IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED))
         val techList = arrayOf(
