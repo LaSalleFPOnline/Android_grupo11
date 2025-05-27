@@ -10,7 +10,10 @@ import android.nfc.NdefMessage
 import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.nfc.tech.IsoDep
+import android.nfc.tech.MifareClassic
+import android.nfc.tech.MifareUltralight
 import android.nfc.tech.Ndef
+import android.nfc.tech.NfcA
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -58,6 +61,16 @@ class AlumnoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val intent = Intent(requireContext(), requireActivity()::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+
+        pendingIntent = PendingIntent.getActivity(
+            requireContext(),
+            0,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
 
         btnVerAsignaturas = view.findViewById(R.id.btnVerAsignaturas)
         btnVerAdvertencias = view.findViewById(R.id.btnVerAdvertencias)
@@ -163,15 +176,25 @@ class AlumnoFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        val intent = Intent(requireContext(), requireActivity()::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        pendingIntent = PendingIntent.getActivity(requireContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        val intent = Intent(requireActivity().applicationContext, requireActivity()::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
 
-        val filters = arrayOf(IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED)) // <- ESTE
-        val techList = arrayOf(arrayOf(android.nfc.tech.IsoDep::class.java.name)) // <- ESTE
+        pendingIntent = PendingIntent.getActivity(
+            requireActivity().applicationContext,
+            0,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+        )
+
+        val filters = arrayOf(IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED))
+        val techList = arrayOf(
+            arrayOf(MifareClassic::class.java.name),
+            arrayOf(NfcA::class.java.name)
+        )
 
         nfcAdapter?.enableForegroundDispatch(requireActivity(), pendingIntent, filters, techList)
 
-        Log.d("educontrol", "📶 ForegroundDispatch activado para IsoDep")
+        Log.d("educontrol", "📶 ForegroundDispatch ACTIVADO para MifareClassic y NfcA")
     }
 
     override fun onPause() {
@@ -185,49 +208,56 @@ class AlumnoFragment : Fragment() {
         Log.d("educontrol", "📲 handleNfcIntent recibido: $intent")
 
         val tag = intent?.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
-        if (tag != null) {
-            val isoDep = IsoDep.get(tag)
-            if (isoDep != null) {
-                Thread {
-                    try {
-                        isoDep.connect()
-
-                        val selectAidApdu = byteArrayOf(
-                            0x00, 0xA4.toByte(), 0x04, 0x00, 0x07,
-                            0xF0.toByte(), 0x01, 0x02, 0x03, 0x04, 0x05, 0x06
-                        )
-
-                        val response = isoDep.transceive(selectAidApdu)
-                        val sw1 = response[response.size - 2]
-                        val sw2 = response[response.size - 1]
-
-                        val data = response.copyOfRange(0, response.size - 2)
-                        val text = String(data)
-
-                        Log.d("educontrol", "📥 Mensaje HCE recibido: $text (SW: %02X %02X)".format(sw1, sw2))
-                        activity?.runOnUiThread {
-                            Toast.makeText(requireContext(), "Mensaje HCE: $text", Toast.LENGTH_LONG).show()
-                        }
-
-                        isoDep.close()
-                    } catch (e: Exception) {
-                        Log.e("educontrol", "❌ Error al usar IsoDep: ${e.message}")
-                    }
-                }.start()
-            } else {
-                Log.w("educontrol", "⚠️ Tag no soporta IsoDep")
-            }
-        } else {
-            // ✅ SIMULACIÓN cuando no se recibe Tag NFC
-            Log.w("educontrol", "❌ No se recibió tag NFC. Ejecutando modo simulado...")
-
-            val textoSimulado = "Asistencia registrada en matematicas"
-            Toast.makeText(requireContext(), " $textoSimulado", Toast.LENGTH_LONG).show()
-            Log.i("educontrol", "✅ Código NFC simulado y guardado: $textoSimulado")
-            codigoRecibidoNfc = textoSimulado
+        if (tag == null) {
+            Log.w("educontrol", "❌ No se recibió tag NFC. Aborting.")
+            return
         }
-    }
 
+        Log.d("educontrol", "✅ Tag detectado con techs: ${tag.techList.joinToString()}")
+
+        val mifare = MifareClassic.get(tag)
+        if (mifare != null) {
+            try {
+                mifare.connect()
+
+                val builder = StringBuilder()
+                var bloquesLeidos = 0
+
+                for (sector in 0 until mifare.sectorCount) {
+                    val auth = mifare.authenticateSectorWithKeyA(sector, MifareClassic.KEY_DEFAULT)
+                    if (!auth) continue
+
+                    val blockStart = mifare.sectorToBlock(sector)
+                    val blockEnd = blockStart + mifare.getBlockCountInSector(sector)
+
+                    for (block in blockStart until blockEnd) {
+                        val data = mifare.readBlock(block)
+                        bloquesLeidos++
+
+                        val texto = data.map { if (it in 32..126) it.toInt().toChar() else '.' }
+                            .joinToString("")
+                        builder.append("🔢 Bloque $block: $texto\n")
+                    }
+                }
+
+                mifare.close()
+
+                if (bloquesLeidos > 0) {
+                    Toast.makeText(requireContext(), "📍 Aula registrada", Toast.LENGTH_LONG).show()
+                    Log.i("educontrol", "✅ Lectura completa:\n${builder.toString()}")
+                } else {
+                    Toast.makeText(requireContext(), "⚠️ Tag sin bloques accesibles", Toast.LENGTH_LONG).show()
+                    Log.w("educontrol", "⚠️ No se pudieron leer bloques:\n${builder.toString()}")
+                }
+
+            } catch (e: Exception) {
+                Log.e("educontrol", "❌ Error leyendo MifareClassic: ${e.message}")
+            }
+            return
+        }
+
+        Log.w("educontrol", "⚠️ Tag no soporta MifareClassic")
+    }
 
 
 
@@ -410,6 +440,8 @@ class AlumnoFragment : Fragment() {
             dialog.show()
         }
     }
+
+
 
 }
 

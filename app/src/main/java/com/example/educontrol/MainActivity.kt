@@ -74,14 +74,18 @@ class MainActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         Log.d("educontrol", "📲 onNewIntent recibido: $intent")
 
+        // ⚠️ NO extraemos el tag aquí. Dejamos que lo haga el fragmento.
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
-        val currentFragment = navHostFragment?.childFragmentManager?.fragments?.firstOrNull()
+        val currentFragment = navHostFragment
+            ?.childFragmentManager
+            ?.fragments
+            ?.firstOrNull { it.isVisible }
 
         if (currentFragment is AlumnoFragment) {
             Log.d("educontrol", "➡️ Reenviando intent al AlumnoFragment")
             currentFragment.handleNfcIntent(intent)
         } else {
-            Log.w("educontrol", "⚠️ currentFragment no es AlumnoFragment")
+            Log.w("educontrol", "⚠️ currentFragment no es AlumnoFragment o está oculto")
         }
     }
 
